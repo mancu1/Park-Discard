@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  if (window.ApplePaySession && ApplePaySession.canMakePayments()){
+	alert("We CAN");
+  } else {
+  alert("we can't");
+  }
+    const applePayMethod = {
+      supportedMethods: "https://apple.com/apple-pay",
+      data: {
+        version: 3,
+        merchantIdentifier: "merchant.com.example",
+        merchantCapabilities: ["supports3DS","supportsCredit","supportsDebit"],
+        supportedNetworks: ["amex","discover","masterCard","visa"],
+        countryCode: "RU"
+      }
+    };
+    const basicCard = {
+      supportedMethods: "basic-card",
+      data: {
+        supportedNetworks: ["visa","mastercard","mir"],
+        supportedTypes: ["credit","debit"]
+      }
+    };
+
+    const googlePaym = {
+      supportedMethods: "https://google.com/pay",
+      data: {
+        environment: "TEST",
+        apiVersion: 1,
+        allowedPaymentMethods: ["CARD","TOKENIZED_CARD"],
+        'paymentMethodTokenizationParameters': {
+          'tokenizationType': 'PAYMENT_GATEWAY',
+          // Check with your payment gateway on the parameters to pass.
+          'parameters': {
+            "gateway": "example",
+            "gatewayMerchantId": "exampleGatewayMerchantId"
+          }
+        },
+        cardRequirements: {
+          allowedCardNetworks: ["AMEX","DISCOVER","MASTERCARD","VISA"],
+          billingAddressRequired: true,
+          billingAddressFormat: "MIN"
+        },
+        phoneNumberRequired: true,
+        emailRequired: true,
+        shippingAddressRequired: true
+      }
+    };
+
+    const methodData = [basicCard,googlePaym,applePayMethod];
+
+    const details = {
+      total: {
+        label: "Итог",
+        amount: { currency: "RUB",value: `300.00` }
+      },
+      displayItems: [
+        {
+          label: "Оплата парковки",
+          amount: { currency: "RUB",value: `300.00` }
+        }
+      ]
+    };
+
+    const request = new PaymentRequest(methodData,details);
+
+    request
+      .show()
+      .then(result =>
+      {
+        result.complete("success");
+      })
+      .catch(err =>
+      {
+      });
+  </script>
+</body>
+
+</html>

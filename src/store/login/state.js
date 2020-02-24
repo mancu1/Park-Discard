@@ -3,7 +3,8 @@ const STATE = {
   phoneNumber: "",
   code: "",
   userToken: "",
-  step: 0
+  step: 0,
+  fakeCode: ""
 };
 
 export default STATE;

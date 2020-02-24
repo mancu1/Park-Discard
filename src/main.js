@@ -8,6 +8,10 @@ import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 import VueQrcodeReader from "vue-qrcode-reader";
 
+import Axios from "axios";
+
+Axios.defaults.baseURL = "https://parkdiscard.ml";
+
 Vue.use(VueQrcodeReader);
 Vue.config.productionTip = false;
 

@@ -2,9 +2,7 @@ const CACHE = "cache-update-and-refresh-v1";
 
 // При установке воркера мы должны закешировать часть данных (статику).
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(["/img/background"]))
-  );
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(["/"])));
 });
 
 // При запросе на сервер мы используем данные из кэша и только после идем на сервер.

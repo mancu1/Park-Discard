@@ -1,5 +1,6 @@
 import {
   SET_CODE,
+  SET_FAKE_CODE,
   SET_LOGIN,
   SET_PHONE,
   SET_STEP,
@@ -44,5 +45,12 @@ export default {
    */
   [SET_TOKEN](state, token) {
     state.token = token;
+  },
+  /***
+   * @param { object } state
+   * @param { string } code
+   */
+  [SET_FAKE_CODE](state, code) {
+    state.fakeCode = code;
   }
 };
